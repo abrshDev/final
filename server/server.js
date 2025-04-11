@@ -2,12 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import authRouter from "./routes/auth/auth-routes.js";
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost5173/",
+    origin: "http://localhost:5173",
     methods: ["Get", "Post", "Put", "Delete"],
     allowedHeaders: [
       "Content-Type",
@@ -22,6 +22,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
+app.use("/api/auth", authRouter);
 const PORT = process.env.PORT || 3000;
 
 try {
