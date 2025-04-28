@@ -16,7 +16,7 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const dispatch = useDispatch();
   function onSubmit(event) {
     event.preventDefault();

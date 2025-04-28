@@ -17,18 +17,33 @@ import ShoppingCheckout from "./pages/shopping-view/checkout";
 import ShoppingAccount from "./pages/shopping-view/account";
 import CheckAuth from "./components/common/check-auth";
 import { checkAuth } from "./store/auth-slice";
+//import { useTheme } from "./store/useTheme";
+import SettingsPage from "./pages/settings-page/SettingsPage";
+
 function App() {
-  const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);
+  //const { theme } = useTheme();
+  const { isAuthenticated, user, isLoading } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
 
+  // Set the theme globally when it changes
+ /*  useEffect(() => {
+    console.log("Current theme: ", theme); // Debugging line
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]); */
+
+  // Check authentication when the app mounts
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   return (
-    <div className="flex flex-col overflow-hidden bg-white">
+    <div className="flex flex-col overflow-hidden">
       <Routes>
         <Route
           path="/auth"
@@ -53,6 +68,7 @@ function App() {
           <Route path="products" element={<AdminProducts />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="features" element={<AdminFeatures />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
         <Route
           path="/shop"

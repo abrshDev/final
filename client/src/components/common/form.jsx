@@ -10,7 +10,7 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 
-function CommonForm({ formControls, formData, setFormData, onSubmit }) {
+function CommonForm({ formControls, formData, setFormData, onSubmit, buttonText, isBtnDisabled }) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
@@ -103,7 +103,7 @@ function CommonForm({ formControls, formData, setFormData, onSubmit }) {
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
-        {formControls.map((controlItem) => (
+        {formControls?.map((controlItem) => (
           <div className="grid w-full gap-1.5" key={controlItem.name}>
             <Label className="mb-1">{controlItem.label}</Label>
             {renderInputsByComponentType(controlItem)}
@@ -111,10 +111,10 @@ function CommonForm({ formControls, formData, setFormData, onSubmit }) {
         ))}
       </div>
       <Button
-        /* disabled={isBtnDisabled} */ type="submit"
-        className="mt-2 w-full"
+         disabled={isBtnDisabled} type="submit"
+        className="mt-2 w-full bg-emerald-900 hover:bg-emerald-800 text-white"
       >
-        {/* buttonText || */ "Submit"}
+        { buttonText ||  "Submit"}
       </Button>
     </form>
   );
